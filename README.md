@@ -13,6 +13,6 @@ An alias I use (but not included in this repo directly) is
 alias aoc='mcd $HOME/docs/projects/aoc23/$(date +%d)'
 ```
 
-where `mcd` is a script to `mkdir -p` and `cd` into `$1.
+where `mcd` is a script to `mkdir -p` and `cd` into `$1`.
 
 Merry Christmas!
