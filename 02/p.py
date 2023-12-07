@@ -1,16 +1,10 @@
-from functools import reduce
-input = 'input.txt'
-with open(input, 'r') as f:
-    lines = f.readlines()
-    lines = [line.strip() for line in lines]
+from math import prod
+with open('input.txt') as f:
+    lines = [line.strip().replace(';', ',')[5:].split(': ') for line in f.readlines()]
 
-allowed = { 'red': 12, 'green': 13, 'blue': 14 }
-lines = [ [int(line.split(': ')[0].split(' ')[1]), [(int(y.split(' ')[0]), y.split(' ')[1]) for x in line.split(': ')[1].split('; ') for y in x.split(', ') ] ] for line in lines]
-part1, part2 = 0, 0
-for iid,line in lines:
-    maxfound = { key: max(val for val,k in line if k == key) for _,key in line }
-    part1 += iid if all([maxfound[key] <= allowed[key] for key in maxfound]) else 0
-    part2 += reduce(lambda x,y: x*y, maxfound.values())
+allowed = { 'red' : 12, 'green' : 13, 'blue' : 14 }
+lines = [[int(i[0]), dict(sorted([[j[1], int(j[0])] for j in [k.split(' ') for k in i[1].split(', ')]]))] for i in lines]
 
-print(part1)
-print(part2)
+part1 = sum([ i for i, line in lines if all([line[k] <= allowed[k] for k in line])])
+part2 = sum([ prod(line.values()) for _, line in lines])
+print(part1, part2, sep='\n')
