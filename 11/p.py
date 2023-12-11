@@ -1,7 +1,7 @@
 from itertools import combinations as comb
 L = [x.strip() for x in open('input.txt')]
 n,m,L_ = list(range(len(L))), list(range(len(L[0]))), list(zip(*L))
-er,ec = {i for i in n if set(L[i]) == set('.')},{j for j in m if set(L_[j]) == set('.')}
+er,ec = {i for i in n if set(L[i]) == {'.'}},{j for j in m if set(L_[j]) == {'.'}}
 galaxies = [ (i, j) for i in n for j in m if L[i][j] == '#' ]
 def expand(point, by=1):
   i, j = point
